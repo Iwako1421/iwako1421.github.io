@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>岩倉光佑 - ポートフォリオ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== 基本スタイル ===== */
+        :root {
+            --primary-color: #005a9c; /* サイトのメインカラー（落ち着いた青） */
+            --light-gray: #f4f4f9;
+            --dark-gray: #333;
+            --text-color: #444;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--light-gray);
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--dark-gray);
+            font-weight: 700;
+        }
+        h2 {
+            font-size: 2em;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 0.5em;
+            margin-bottom: 1em;
+        }
+        h3 {
+            font-size: 1.5em;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 0.8em;
+            margin-top: 2em;
+        }
+        h4 {
+            font-size: 1.2em;
+            margin-top: 1.5em;
+            color: var(--primary-color);
+        }
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        ul li {
+            padding-left: 1.2em;
+            text-indent: -1.2em;
+        }
+        ul li::before {
+            content: '■';
+            color: var(--primary-color);
+            margin-right: 0.5em;
+        }
+
+        /* ===== レイアウト ===== */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        section {
+            background-color: #fff;
+            padding: 2em;
+            margin-bottom: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        /* ===== ヘッダー ===== */
+        header {
+            text-align: center;
+            padding: 2em 0;
+        }
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        header p {
+            font-size: 1.2em;
+            color: var(--text-color);
+        }
+        header nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1em 2em;
+            margin-top: 1.5em;
+        }
+        header nav ul li::before {
+            content: ''; /* ナビゲーションの■は消す */
+        }
+        /* ===== 1枚のヘッダー画像 ===== */
+        .header-image {
+            width: 100%;             /* 横幅を親要素いっぱいに広げる */
+            height: 500px;           /* ヘッダーの高さを指定（この数値は自由に変更可能） */
+            object-fit: cover;       /* 画像の比率を保ったまま領域を埋める */
+            border-radius: 8px;      /* 画像の角を少し丸める */
+            margin-top: 2em;         /* 上のテキストとの余白 */
+            margin-bottom: 2em;      /* 下のナビゲーションとの余白 */
+        }
+        /* ===== 活動経歴のレイアウト ===== */
+        .activity-list {
+            list-style: none; /* liの黒点を消す */
+            padding: 0;
+        }
+        .activity-list li::before {
+            content: ''; /* liの■を消す */
+        }
+        .activity-item {
+            display: flex;
+            flex-direction: column; /* 縦積み */
+            align-items: flex-start; /* コンテンツを左揃えに */
+            gap: 0.5em;            /* 隙間を調整 */
+            margin-bottom: 2em;    /* 各項目の下の余白を少し増やす */
+        }
+        .activity-image {
+            width: 100%;           /* 画像の幅をコンテナいっぱいに広げる */
+            max-width: 600px;      /* ただし、画像の最大幅は600pxに制限 */
+            margin-top: 1em;       /* 説明文と画像の間に余白を追加 */
+        }
+        .activity-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;     /* 画像の比率を保ったまま領域を埋める */
+            border-radius: 8px;    /* 角を少し丸める */
+        }
+        .activity-description {
+            flex-grow: 1;          /* テキスト部分が残りの幅をすべて使うようにする */
+        }
+        /* ===== スキル欄の作例画像 ===== */
+        .skill-image {
+            display: block;          /* 画像をブロック要素として扱う */
+            margin-top: 1em;         /* 上のテキストとの余白 */
+            margin-bottom: 1.5em;
+            width: 100%;             /* 横幅をコンテナいっぱいに広げる */
+            max-width: 500px;        /* ただし、画像の最大幅は500pxに制限 */
+            border-radius: 8px;      /* 画像の角を少し丸める */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* 影をつけて立体感を出す */
+        }
+        /* ===== 個人製作の作例画像 ===== */
+        .project-image {
+            display: block;
+            margin-bottom: 1.5em;    /* 下の「概要」との間に余白を作る */
+            width: 100%;
+            max-width: 700px;        /* 画像の最大幅を少し大きめに設定 */
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-left: auto;       /* 画像を中央に配置 */
+            margin-right: auto;      /* 画像を中央に配置 */
+        }
+        /* ===== 各セクションの個別スタイル ===== */
+        /* 大会実績 */
+        #competitions ul li, #history ul li {
+            margin-bottom: 1em;
+        }
+
+        /* スキル */
+        .skill-category {
+            margin-bottom: 2em;
+        }
+
+        /* 個人製作 */
+        .project-item {
+            border: 1px solid #eee;
+            padding: 1.5em;
+            margin-bottom: 2em;
+            border-radius: 8px;
+        }
+        
+        /* フッター */
+        footer {
+            text-align: center;
+            padding: 2em 0;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>岩倉 光佑</h1>
+            <p>Mechatronics Engineer</p>
+            <nav>
+                <ul>
+                    <li><a href="#about">自己紹介</a></li>
+                    <li><a href="#history">経歴と資格</a></li>
+                    <li><a href="#skills">スキル</a></li>
+                    <li><a href="#competitions">大会実績</a></li>
+                    <li><a href="#projects">個人製作</a></li>
+                    <li><a href="#contact">連絡先</a></li>
+                </ul>
+            </nav>
+            <img src="images/header.jpg" alt="ヘッダー画像" class="header-image">
+        </header>
+
+        <main>
+
+            <section id="about">
+                <h2>自己紹介</h2>
+                <p>
+                    電子工作、ロボット製作、メカトロ工作等、分野を横断したものづくりに情熱を注いでいます。<br>
+                    私の強みは、構想から設計、実装、そして実用化までを一貫して手掛けられる技術力です。<br>
+                    大学では、ロボコンや鳥人間といったサークル活動でチーム開発を学ぶ傍ら、個人でも<br>
+                    自作CPU（デジタル回路・ソフトウェア）、アナログPIDライントレーサー（アナログ回路・制御）、モバイルバッテリー（電源）、自作特定小型原付（メカトロ・パワエレ）など、<br>
+                    幅広い製作に挑戦。机上の理論に留まらず、実際に動くものを生み出す経験を積んできました。<br>
+                    これらの経験の土台には、小学生から続けてきたロボコンへの出場と独学でのものづくり活動があります。<br>
+                    さらに、技術系ベンチャーでの筐体・回路設計のアルバイト経験を通じて、実務レベルでの開発プロセスも学んでいます。<br>
+                    これまで培ってきた幅広い技術知識と実践力をもとに、ものづくりを通じて社会に貢献したいです。
+                </p>
+            </section>
+
+            <section id="history">
+                <h2>経歴と資格</h2>
+                <h3>学歴</h3>
+                <ul>
+                    <li>2021.03　学校法人高田学苑 高田中・高等学校 卒業</li>
+                    <li>2021.04　京都大学 入学</li>
+                    <li>2027.03　京都大学 卒業見込み</li>
+                </ul>
+                <h3>主な活動経歴</h3>
+                <ul class="activity-list">
+                    <li>
+                        <div class="activity-item">
+                            <div class="activity-image">
+                                <img src="images/kikaiken.jpg" alt="京大機械研究会">
+                            </div>
+                            <div class="activity-description">
+                                <strong>京大機械研究会 (2021.04 - 現在)</strong><br>
+                                技術顧問的な立場で、複数のロボコンプロジェクトに横断的に関与。ハードウェア及び回路設計を主導し、NHK学生ロボコン2023本選出場や、キャチロボバトルコンテストでの2年連続ベスト4・審査員特別賞受賞に貢献。
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                         <div class="activity-item">
+                             <div class="activity-image">
+                                 <img src="images/toriningen.jpg" alt="京大鳥人間">
+                             </div>
+                             <div class="activity-description">
+                                 <strong>京大鳥人間 (2021.04 - 2023.07)</strong><br>
+                                 電装班長として、電気操舵装置（フライバイワイヤ）や各種センサー、データロガーの設計・実装を担当。試験飛行や鳥人間コンテストでの機体の飛行成功に貢献。
+                             </div>
+                         </div>
+                    </li>
+                    <li>
+                        <strong>株式会社シー・オー・コンヴ (2024.07 - 現在)</strong><br>
+                        製品の試作筐体の設計製作や回路設計など、より実践的な開発業務に従事。
+                    </li>
+                    <li>
+                        <strong>株式会社ロバリフ (2021.09 - 現在)</strong><br>
+                        IoTナースコールの回路の試作業務などに従事。
+                    </li>
+                </ul>
+                <h3>資格</h3>
+                <ul>
+                    <li>第二種電気工事士 (2022.02)</li>
+                    <li>普通自動車第一種運転免許 (2021.09)</li>
+                    <li>実用英語技能検定 準1級</li>
+                </ul>
+            </section>
+
+            <section id="skills">
+                <h2>スキル</h2>
+                <p>
+                    構想から実装まで、ハードウェアとソフトウェアを横断した開発を得意としています。特に、以下の技術分野に強みがあります。
+                </p>
+                <div class="skill-category">
+                    <h3>機構設計 (Mechanical Design)</h3>
+                    <ul>
+                        <li>
+                            <strong>CAD (Fusion360, Autodesk Inventor):</strong> ロボットコンテスト用の機体や鳥人間の操舵機構、アルバイトでの製品筐体など、多数の設計・製作経験があります。
+                            <img src="images/3dcad.jpg" alt="CAD設計の作例" class="skill-image">
+                        </li>
+                        <li>
+                            <strong>工作機械 (CNC, 旋盤, 3Dプリンタ):</strong> 設計データから実際に部品を製作し、組み立てるまでの一連のプロセスに対応可能です。
+                        </li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>回路・基板設計 (Circuit & PCB Design)</h3>
+                    <ul>
+                        <li>
+                            <strong>PCB設計 (KiCad):</strong> モータードライバやセンサー基板、電源回路など、要求仕様に基づいた回路設計とアートワーク、実装までを一貫して行えます。
+                            <img src="images/pcbdesign.jpg" alt="PCB設計の作例" class="skill-image">
+                        </li>
+                        <li>
+                            <strong>アナログ・デジタル回路:</strong> 自作CPUやPID制御ライントレーサーの製作を通じて、論理回路からオペアンプを用いたアナログ回路まで幅広く扱います。
+                        </li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>ソフトウェア・組み込み (Software & Embedded Systems)</h3>
+                    <ul>
+                        <li>
+                            <strong>プログラミング言語 (C/C++):</strong> 組み込みシステムの開発で最も使用。リアルタイム性が求められるモーター制御やセンサーのデータ処理などを実装してきました。
+                        </li>
+                        <li>
+                            <strong>マイコン (Arduino, STM32, PIC):</strong> プロジェクトの要件に応じて最適なマイコンを選定し、レジスタレベルからの開発も行えます。鳥人間でのデータロガーやロボットの制御システムなどで豊富な使用経験があります。
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="competitions">
+                <h2>大会実績</h2>
+                <p>
+                    小学生の頃から現在まで、独学で様々なロボットコンテストに挑戦してきました。特に、以下の実績は私の技術的な基盤を築く上で重要な経験となりました。
+                </p>
+                <h3>主要な実績</h3>
+                <ul>
+                    <li>
+                        <strong>World Robot Olympiad 2019 International Final</strong> (2019年)<br>
+                        <strong>成績: 世界9位</strong> (開催国: ハンガリー)
+                    </li>
+                    <li>
+                        <strong>NHK学生ロボコン</strong> (2023年)<br>
+                        <strong>成績: 本選出場</strong> (京大機械研究会)
+                    </li>
+                    <li>
+                        <strong>キャチロボバトルコンテスト</strong> (2023年, 2024年)<br>
+                        <strong>成績: 2年連続ベスト4 & 審査員特別賞</strong> (京大機械研究会)
+                    </li>
+                    <li>
+                        <strong>第9回 科学の甲子園 三重県大会</strong> (2019年)<br>
+                        <strong>成績: 総合優勝</strong>
+                    </li>
+                    <li>
+                        <strong>きのくにロボットフェスティバル 全日本小中学生ロボット選手権</strong> (2015年)<br>
+                        <strong>成績: 優勝 & イノベーション大賞</strong>
+                    </li>
+                </ul>
+                <h3>その他の主な実績</h3>
+                <p>
+                    その他、WRO Japan決勝大会（準優勝）、全国中学生創造アイディアロボットコンテスト（特許庁長官賞）、熱田の森ロボット競技会（優勝）など、多数の大会で入賞経験があります。
+                </p>
+            </section>
+
+            <section id="projects">
+                <h2>個人製作</h2>
+                <p>
+                    日々の学習や好奇心から生まれたアイデアを、分野を問わず実際に形にしています。ここでは、その代表的な製作物を紹介します。
+                </p>
+                <article class="project-item">
+                    <h4>公道走行可能な自作特定小型原動機付自転車</h4>
+                    <img src="images/project-ebike.jpg" alt="自作した特定小型原付の写真" class="project-image">
+                    <h5>概要</h5>
+                    <p>
+                        日常の移動手段の確保という身近な課題を解決するため、保安基準に準拠した実用的な電動バイクを構想から設計・製作しました。実際にナンバーを取得し、公道を走行可能です。
+                    </p>
+                    <h5>使用した主な技術</h5>
+                    <p>機械設計 (CAD), ブラシレスモータドライバ, バッテリー監視回路, 電流PI制御, パワーエレクトロニクス</p>
+                    <h5>工夫した点・困難だった点</h5>
+                    <p>
+                        保安基準を満たすことを前提に、安全性を最優先した設計を行いました。既存の自転車フレームを補強しつつ強度を確保する機械設計や、大電流・振動といった過酷な車載条件に耐える回路・基板の設計に注力しました。
+                    </p>
+                </article>
+                <article class="project-item">
+                    <h4>NANDゲートICのみで構築した自作4bit CPU</h4>
+                    <img src="images/project-cpu.jpg" alt="自作CPUの写真" class="project-image">
+                    <h5>概要</h5>
+                    <p>
+                        コンピュータの動作原理を根源から理解するため、数百個のNANDゲートIC（74HC00）のみを用いてCPUをフルスクラッチで開発しました。フィボナッチ数の計算などが可能です。
+                    </p>
+                    <h5>使用した主な技術</h5>
+                    <p>論理回路設計 (組み合わせ回路, 順序回路), KiCad, 機械語, アセンブラ</p>
+                    <h5>工夫した点・困難だった点</h5>
+                    <p>
+                        「CPUの仕組みを作りながら楽しむ」ことを目標とし、展示会などでの可搬性も考慮して、機能性を損なわずに基板を可能な限りコンパクトに設計した点が工夫点です。
+                    </p>
+                </article>
+                <article class="project-item">
+                    <h4>マイコンレス アナログPIDライントレーサー</h4>
+                    <img src="images/project-linefollower.jpg" alt="アナログPIDライントレーサの写真" class="project-image">
+                    <h5>概要</h5>
+                    <p>
+                        オペアンプによる微積分演算の応用として、マイコンを一切使用せず、アナログ回路のみでPID制御によるライントレースを実現しました。
+                    </p>
+                    <h5>使用した主な技術</h5>
+                    <p>オペアンプ, アナログ回路設計, PID制御, センサー回路</p>
+                    <h5>工夫した点・困難だった点</h5>
+                    <p>
+                        先例がほとんどない挑戦だったため、制御理論から回路の仕組みまで全て自身で考案・設計する必要がありましたが、そのプロセス自体が最大の楽しみでもありました。
+                    </p>
+                </article>
+                <article class="project-item">
+                    <h4>USB-PD対応 45W出力モバイルバッテリー</h4>
+                    <img src="images/project-mobilebattery.jpg" alt="自作モバイルバッテリーの写真" class="project-image">
+                    <h5>概要</h5>
+                    <p>
+                        USB-PD規格や電源回路への理解を深めるため、高出力（45W）なモバイルバッテリーを自作しました。4セルのリチウムイオン電池を安全に管理します。
+                    </p>
+                    <h5>使用した主な技術</h5>
+                    <p>電源回路, DCDCコンバータ, リチウムイオン電池充放電制御, USB-PD</p>
+                    <h5>工夫した点・困難だった点</h5>
+                    <p>
+                        日常でのハードな使用を想定し、安全性と堅牢性を最優先した回路・筐体設計を心掛けました。特に、多セルバッテリーの安全な充放電管理回路の設計は大きな挑戦でした。
+                    </p>
+                </article>
+                <hr>
+                <h3>その他の製作物</h3>
+                <p>
+                    その他にも、ペンプロッタ、VFD時計、赤外線リモコンフォークリフト模型、VVVFインバータ、テスラコイルなど、好奇心の赴くままに様々なジャンルのものづくりに挑戦しています。
+                </p>
+            </section>
+
+            <section id="contact">
+                <h2>連絡先</h2>
+                <p>
+                    ご連絡、ご相談は以下のメールアドレスまでお願いいたします。<br>
+                </p>
+                <ul>
+                    <li>メール: k_iwakura1421@outlook.jp</li>
+                    </ul>
+            </section>
+
+        </main>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Kosuke Iwakura. All Rights Reserved.</p>
+                </div>
+        </footer>
+
+    </div></body>
+</html>
